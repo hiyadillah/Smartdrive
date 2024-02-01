@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\HR\" />
+    <Folder Include="Controllers\User\" />
+    <Folder Include="Controllers\Service Order\" />
+    <Folder Include="Controllers\Payment\" />
+    <Folder Include="Controllers\Partner\" />
+    <Folder Include="Db\" />
+    <Folder Include="DTO\HR\" />
+    <Folder Include="DTO\Partner\" />
+    <Folder Include="DTO\User\" />
+    <Folder Include="DTO\Service Order\" />
+    <Folder Include="DTO\Payment\" />
+    <Folder Include="Models\" />
+    <Folder Include="Repositories\HR\" />
+    <Folder Include="Repositories\Partner\" />
+    <Folder Include="Repositories\Payment\" />
+    <Folder Include="Repositories\Service Order\" />
+    <Folder Include="Repositories\User\" />
+    <Folder Include="Services\HR\" />
+    <Folder Include="Services\Partner\" />
+    <Folder Include="Services\User\" />
+    <Folder Include="Services\Payment\" />
+    <Folder Include="Services\Service Order\" />
+  </ItemGroup>
+
+</Project>
