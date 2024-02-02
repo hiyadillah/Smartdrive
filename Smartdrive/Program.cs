@@ -1,8 +1,11 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Smartdrive.Db;
+using Smartdrive.Extension;
 using Smartdrive.Models;
 using Smartdrive.Repositories;
 using Smartdrive.Repositories.Master;
+using Smartdrive.Repositories.Service_Order;
 using Smartdrive.Services.Master;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,10 +17,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// add auto mapper
+builder.Services.AddAutoMapper(typeof(MapperProfile));
+
 builder.Services.AddScoped<IRepository<CarBrand>, CarBrandRepository>();
 builder.Services.AddScoped<ICarBrandService, CarBrandService>();
+builder.Services.AddScoped<ServiceRepository>();
+builder.Services.AddScoped<Mapper>();
+
+
 builder.Services.AddDbContext<SmartdriveContext>(
-    options => options.UseSqlServer("Server=CODEID-RAMA\\SQLEXPRESS; Initial Catalog=Smartdrive; Trusted_Connection=True; TrustServerCertificate=True;"));
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("SmartDriveDB")));
 
 var app = builder.Build();
 
