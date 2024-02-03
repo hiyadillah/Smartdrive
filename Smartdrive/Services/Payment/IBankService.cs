@@ -2,9 +2,9 @@
 
 namespace Smartdrive.Services.Payment
 {
-    public interface IUserAccountService
+    public interface IBankService
     {
-        public List<UserAccountResponse> FindAll();
+        public List<BankResponse> FindAll();
     }
 
 }

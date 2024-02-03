@@ -27,8 +27,13 @@ builder.Services.AddScoped<ICarBrandService, CarBrandService>();
 builder.Services.AddScoped<ServiceRepository>();
 builder.Services.AddScoped<Mapper>();
 
+//Payment.UserAccount
 builder.Services.AddScoped<IRepository<UserAccount>, UserAccountRepository>();
 builder.Services.AddScoped<IUserAccountService, UserAccountsService>();
+
+//Paymnet.Bank
+builder.Services.AddScoped<IRepository<Bank>, BankRepository>();
+builder.Services.AddScoped<IBankService, BankService>();
 
 builder.Services.AddDbContext<SmartdriveContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("SmartDriveDB")));
