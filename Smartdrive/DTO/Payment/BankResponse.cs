@@ -1,4 +1,4 @@
 ﻿namespace Smartdrive.DTO.Payment
 {
-    public record BankResponse(int bankEntityId, string bankName, string bankDesc); 
+    public record BankResponse(int bankEntityId, string? bankName, string? bankDesc); 
 }

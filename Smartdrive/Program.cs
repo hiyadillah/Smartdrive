@@ -35,6 +35,10 @@ builder.Services.AddScoped<IUserAccountService, UserAccountsService>();
 builder.Services.AddScoped<IRepository<Bank>, BankRepository>();
 builder.Services.AddScoped<IBankService, BankService>();
 
+//Payment.PaymentTransaction
+builder.Services.AddScoped<IRepository<PaymentTransaction>, TransactionPaymentRepository>();
+builder.Services.AddScoped<IPaymentTransactionService, PaymentTransactionService>();
+
 builder.Services.AddDbContext<SmartdriveContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("SmartDriveDB")));
 
