@@ -27,6 +27,7 @@ builder.Services.AddScoped<ICarBrandService, CarBrandService>();
 builder.Services.AddScoped<ServiceRepository>();
 builder.Services.AddScoped<Mapper>();
 
+#region Payment
 //Payment.UserAccount
 builder.Services.AddScoped<IRepository<UserAccount>, UserAccountRepository>();
 builder.Services.AddScoped<IUserAccountService, UserAccountsService>();
@@ -38,6 +39,12 @@ builder.Services.AddScoped<IBankService, BankService>();
 //Payment.PaymentTransaction
 builder.Services.AddScoped<IRepository<PaymentTransaction>, TransactionPaymentRepository>();
 builder.Services.AddScoped<IPaymentTransactionService, PaymentTransactionService>();
+
+
+//Payment.PaymentTransaction
+builder.Services.AddScoped<IRepository<Fintech>, FintechRepository>();
+builder.Services.AddScoped<IFintechService, FintechService>();
+#endregion
 
 builder.Services.AddDbContext<SmartdriveContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("SmartDriveDB")));
