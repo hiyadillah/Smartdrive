@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Smartdrive.DTO.Customer_Request;
 using Smartdrive.DTO.Service_Order;
 using Smartdrive.Models;
 
@@ -9,6 +10,7 @@ namespace Smartdrive.Extension
         public MapperProfile()
         {
             CreateMap<Service, ServiceDto>().ReverseMap();
+            CreateMap<CustomerRequest, CustomerRequestDto>().ReverseMap();
         }
     }
 }
