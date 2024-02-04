@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Smartdrive.DTO.Payment;
+using Smartdrive.Models;
 using Smartdrive.Services.Payment;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -26,9 +27,17 @@ namespace Smartdrive.Controllers.Payment
 
         // GET api/<UserAccountsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            UserAccountResponse data = _userAccountService.FindById(id);
+
+            if (data == null)
+            {
+                // Return a 404 Not Found status code with a custom error message
+                return NotFound("User not found with the given ID");
+            }
+
+            return Ok(data);
         }
 
         // POST api/<UserAccountsController>

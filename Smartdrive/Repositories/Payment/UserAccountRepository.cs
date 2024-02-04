@@ -28,7 +28,12 @@ namespace Smartdrive.Repositories.Payment
 
         public UserAccount FindById(dynamic id)
         {
-            throw new NotImplementedException();
+            using var db = new SmartdriveContext();
+            int convertedID = id;
+            UserAccount data = db.UserAccounts.Where(d => d.UsacId == convertedID).FirstOrDefault();
+
+            return data;
+
         }
     }
 }
