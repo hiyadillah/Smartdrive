@@ -12,6 +12,17 @@ namespace Smartdrive.Services.Payment
             _repo = repo;
         }
 
+        public BankResponse FindById(int id)
+        {
+            var data = _repo.FindById(id);
+            if (data == null)
+                return null;
+
+            BankResponse response = new(data.BankEntityid, data.BankName, data.BankDesc);
+
+            return response;
+        }
+
         List<BankResponse> IBankService.FindAll()
         {
             var data = _repo.FindAll();

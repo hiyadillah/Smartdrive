@@ -26,9 +26,13 @@ namespace Smartdrive.Controllers.Payment
 
         // GET api/<FintechController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            var data = _repo.FindById(id);
+            if (data == null)
+                return NotFound("User not found with the given ID");
+
+            return Ok(data);
         }
 
         // POST api/<FintechController>

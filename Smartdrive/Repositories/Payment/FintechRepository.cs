@@ -20,7 +20,11 @@ namespace Smartdrive.Repositories.Payment
 
         public Fintech FindById(dynamic id)
         {
-            throw new NotImplementedException();
+            using var db = new SmartdriveContext();
+            int idToInt = id;
+            Fintech data = db.Finteches.Where(x => x.FintEntityid == idToInt).FirstOrDefault();
+
+            return data;
         }
     }
 }

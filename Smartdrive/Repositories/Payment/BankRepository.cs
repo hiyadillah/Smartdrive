@@ -28,7 +28,11 @@ namespace Smartdrive.Repositories.Payment
 
         public Bank FindById(dynamic id)
         {
-            throw new NotImplementedException();
+            using var db = new SmartdriveContext();
+            int idToInt = id;
+            Bank data = db.Banks.Where(x => x.BankEntityid == idToInt).FirstOrDefault();
+
+            return data;
         }
 
     }

@@ -26,9 +26,13 @@ namespace Smartdrive.Controllers.Payment
 
         // GET api/<PaymentTransactionController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(string id)
         {
-            return "value";
+            var data = _paymentTransactionService.FindById(id);
+            if (data == null)
+                return NotFound("User not found with the given ID");
+
+            return Ok(data);
         }
 
         // POST api/<PaymentTransactionController>

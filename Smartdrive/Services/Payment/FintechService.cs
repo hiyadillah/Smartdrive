@@ -24,10 +24,16 @@ namespace Smartdrive.Services.Payment
 
             return responses;
         }
-    }
 
-    public interface IFintechService
-    {
-        public List<FintechResponse> FindAll();
+        public FintechResponse FindById(int id)
+        {
+            var data = _repo.FindById(id);
+            if (data == null)
+                return null;
+
+            FintechResponse response = new(data.FintEntityid, data.FintName, data.FintDesc);
+
+            return response;
+        }
     }
 }

@@ -19,7 +19,11 @@ namespace Smartdrive.Repositories.Payment
 
         public PaymentTransaction FindById(dynamic id)
         {
-            throw new NotImplementedException();
+            using var db = new SmartdriveContext();
+            string convertedId = id;
+            PaymentTransaction data = db.PaymentTransactions.Where(x => x.PatrTrxno == convertedId).FirstOrDefault(); 
+
+            return data;
         }
     }
 }

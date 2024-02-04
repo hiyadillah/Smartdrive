@@ -24,6 +24,16 @@ namespace Smartdrive.Services.Payment
             }
             return responses;
         }
+
+        public PaymentTransactionResponse FindById(string id)
+        {
+            var data = _repo.FindById(id);
+            if (data == null)
+                return null;
+
+            PaymentTransactionResponse response = new(data.PatrTrxno, data.PatrCreatedOn, data.PatrDebet, data.PatrCredit, data.PatrUsacAccountNoFrom, data.PatrUsacAccountNoTo, data.PatrType, data.PatrInvoiceNo, data.PatrNotes);
+            return response;
+        }
     }
 
 }
