@@ -12,11 +12,11 @@ namespace Smartdrive.Controllers.Payment
     [ApiController]
     public class FintechController : ControllerBase
     {
-        private readonly IFintechService _repo;
+        private readonly IFintechService _fintService;
 
         public FintechController(IFintechService repo)
         {
-            _repo = repo;
+            _fintService = repo;
         }
 
         // GET: api/<FintechController>
@@ -24,14 +24,14 @@ namespace Smartdrive.Controllers.Payment
         public List<FintechResponse> Get()
 
         {
-            return _repo.FindAll();
+            return _fintService.FindAll();
         }
 
         // GET api/<FintechController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var data = _repo.FindById(id);
+            var data = _fintService.FindById(id);
             if (data == null)
                 return NotFound("User not found with the given ID");
 
@@ -40,21 +40,32 @@ namespace Smartdrive.Controllers.Payment
 
         // POST api/<FintechController>
         [HttpPost]
-        public IActionResult Post([FromBody] Fintech value)
+        public IActionResult Post(string fintName, string fintDesc)
         {
-            return Ok(value);
+            _fintService.Create(fintName, fintDesc);
+            return Ok("SuccesfullyCreated");
         }
 
         // PUT api/<FintechController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, string fintName, string fintDesc)
         {
+            FintechResponse data = _fintService.FindById(id);
+            if (data == null)
+                return NotFound("User not found with the given ID");
+            _fintService.Update(data.fintEntityId, fintName, fintDesc);
+            return Ok("Data Changed");
         }
 
         // DELETE api/<FintechController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            var data = _fintService.FindById(id);
+            if (data == null)
+                return NotFound("User not found with the given ID");
+            _fintService.Delete(id);
+            return Ok("Delete Succesfull");
         }
     }
 }

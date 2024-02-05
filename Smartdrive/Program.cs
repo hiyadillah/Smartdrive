@@ -41,9 +41,9 @@ builder.Services.AddScoped<IBankService, BankService>();
 builder.Services.AddScoped<IRepository<PaymentTransaction>, TransactionPaymentRepository>();
 builder.Services.AddScoped<IPaymentTransactionService, PaymentTransactionService>();
 
-
-//Payment.PaymentTransaction
+//Payment.Fintech
 builder.Services.AddScoped<IRepository<Fintech>, FintechRepository>();
+builder.Services.AddScoped<IFintechRepo, FintechRepository>();
 builder.Services.AddScoped<IFintechService, FintechService>();
 #endregion
 

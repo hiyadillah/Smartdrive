@@ -27,13 +27,7 @@ namespace Smartdrive.Services.Payment
 
         public BankResponse Create(int bankEntityId, string bankName, string bankDesc)
         {
-            Bank bank = new();
-            bank.BankEntityid = bankEntityId;
-            bank.BankName = bankName;
-            bank.BankDesc = bankDesc;
-
-            BankResponse bankResponse = new(bankEntityId, bank.BankName, bank.BankDesc);
-
+            BankResponse bankResponse = new(bankEntityId, bankName, bankDesc);
             _bankRepo.Create(bankResponse);
 
             return bankResponse;

@@ -37,9 +37,10 @@ namespace Smartdrive.Controllers.Payment
 
         // POST api/<BankController>
         [HttpPost]
-        public void Post(int bankEntityId, string bankName, string bankDesc)
+        public IActionResult Post(int bankEntityId, string bankName, string bankDesc)
         {
             _bankService.Create(bankEntityId, bankName, bankDesc);
+            return Ok("SuccesfullyCreated");
         }
 
         // PUT api/<BankController>/5
