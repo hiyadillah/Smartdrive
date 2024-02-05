@@ -1,15 +1,33 @@
 ﻿using Smartdrive.DTO.Payment;
 using Smartdrive.Models;
 using Smartdrive.Repositories;
+using Smartdrive.Repositories.Payment;
 
 namespace Smartdrive.Services.Payment
 {
     public class BankService : IBankService
     {
         private readonly IRepository<Bank> _repo;
-        public BankService(IRepository<Bank> repo)
+        private readonly IBankRepo _bankRepo;
+        public BankService(IRepository<Bank> repo, IBankRepo bankRepo)
         {
             _repo = repo;
+            _bankRepo = bankRepo;
+        }
+
+        public BankResponse Create(int bankEntityId, string bankName, string bankDesc)
+        {
+            Bank bank = new();
+            bank.BankEntityid = bankEntityId;
+            bank.BankName = bankName;
+            bank.BankDesc = bankDesc;
+
+            BankResponse bankResponse = new(bankEntityId, bank.BankName, bank.BankDesc);
+
+            _bankRepo.Create(bankResponse);
+
+            return bankResponse;
+
         }
 
         public BankResponse FindById(int id)

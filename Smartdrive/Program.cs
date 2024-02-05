@@ -34,6 +34,7 @@ builder.Services.AddScoped<IUserAccountService, UserAccountsService>();
 
 //Paymnet.Bank
 builder.Services.AddScoped<IRepository<Bank>, BankRepository>();
+builder.Services.AddScoped<IBankRepo, BankRepository>();
 builder.Services.AddScoped<IBankService, BankService>();
 
 //Payment.PaymentTransaction

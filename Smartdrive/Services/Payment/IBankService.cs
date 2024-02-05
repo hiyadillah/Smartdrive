@@ -6,6 +6,8 @@ namespace Smartdrive.Services.Payment
     {
         public List<BankResponse> FindAll();
         public BankResponse FindById(int id);
+
+        public BankResponse Create(int bankEntityId, string bankName, string bankDesc);
     }
 
 }
