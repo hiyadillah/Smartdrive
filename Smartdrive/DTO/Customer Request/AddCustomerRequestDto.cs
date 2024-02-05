@@ -1,8 +1,7 @@
 ﻿namespace Smartdrive.DTO.Customer_Request
 {
-    public record CustomerRequestDto
+    public record AddCustomerRequestDto
     (
-        int CreqEntityid,
         DateTime? CreqCreateDate,
         string? CreqStatus,
         string? CreqType,

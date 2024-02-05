@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Smartdrive.DTO.Customer_Request;
 using Smartdrive.Extension;
-using Smartdrive.Services.CustomerRequest;
+using Smartdrive.Services.Customer_Request;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,27 +27,45 @@ namespace Smartdrive.Controllers.Customer_Request
 
         // GET api/<CustomerRequestController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<ServiceResponse<CustomerRequestDto>>> GetCustomerRequestById(int id)
         {
-            return "value";
+            var response = await _service.GetCustomerRequestById(id);
+            if (response.Data is null)
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
         }
 
         // POST api/<CustomerRequestController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<ServiceResponse<CustomerRequestDto>>> CreateCustomerRequest(AddCustomerRequestDto newRequest)
         {
+            return Ok(await _service.CreateCustomerRequest(newRequest));
         }
 
         // PUT api/<CustomerRequestController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<ActionResult<ServiceResponse<CustomerRequestDto>>> UpdateCustomerRequest(UpdateCustomerRequestDto updatedRequest)
         {
+            var response = await _service.UpdateCustomerRequest(updatedRequest);
+            if (response.Data is null)
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
         }
 
         // DELETE api/<CustomerRequestController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<ServiceResponse<CustomerRequestDto>>> DeleteCustomerRequest(int id)
         {
+            var response = await _service.DeleteCustomerRequest(id);
+            if(response.Data is null)
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
         }
     }
 }

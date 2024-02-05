@@ -11,6 +11,8 @@ namespace Smartdrive.Extension
         {
             CreateMap<Service, ServiceDto>().ReverseMap();
             CreateMap<CustomerRequest, CustomerRequestDto>().ReverseMap();
+            CreateMap<CustomerRequest, AddCustomerRequestDto>().ReverseMap();
+            CreateMap<CustomerRequest, UpdateCustomerRequestDto>().ReverseMap();
         }
     }
 }
