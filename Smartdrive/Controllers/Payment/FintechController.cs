@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Smartdrive.DTO.Payment;
 using Smartdrive.Models;
 using Smartdrive.Repositories;
+using Smartdrive.Services.Payment;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,16 +12,17 @@ namespace Smartdrive.Controllers.Payment
     [ApiController]
     public class FintechController : ControllerBase
     {
-        private readonly IRepository<Fintech> _repo;
+        private readonly IFintechService _repo;
 
-        public FintechController(IRepository<Fintech> repo)
+        public FintechController(IFintechService repo)
         {
             _repo = repo;
         }
 
         // GET: api/<FintechController>
         [HttpGet]
-        public IEnumerable<Fintech> Get()
+        public List<FintechResponse> Get()
+
         {
             return _repo.FindAll();
         }
