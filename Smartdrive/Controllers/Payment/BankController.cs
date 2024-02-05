@@ -17,7 +17,6 @@ namespace Smartdrive.Controllers.Payment
             _bankService = bankService;
         }
 
-
         // GET: api/<BankController>
         [HttpGet]
         public List<BankResponse> Get()
@@ -38,7 +37,7 @@ namespace Smartdrive.Controllers.Payment
 
         // POST api/<BankController>
         [HttpPost]
-        public void Post(  int bankEntityId, string bankName, string bankDesc)
+        public void Post(int bankEntityId, string bankName, string bankDesc)
         {
             _bankService.Create(bankEntityId, bankName, bankDesc);
         }
@@ -51,8 +50,12 @@ namespace Smartdrive.Controllers.Payment
 
         // DELETE api/<BankController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            var data = _bankService.FindById(id);
+            if (data == null)
+                return NotFound("User not found with the given ID");
+            return Ok(_bankService.Delete(id));
         }
     }
 }

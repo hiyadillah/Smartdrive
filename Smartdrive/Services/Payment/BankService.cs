@@ -15,6 +15,16 @@ namespace Smartdrive.Services.Payment
             _bankRepo = bankRepo;
         }
 
+        public BankResponse? Delete(int bankEntityId)
+        {
+            var bank = _repo.FindById(bankEntityId);
+            if (bank == null)
+                return null;
+            BankResponse bankResponse = new(bankEntityId, bank.BankName, bank.BankDesc);
+            _bankRepo.Delete(bank.BankEntityid);
+            return bankResponse;
+        }
+
         public BankResponse Create(int bankEntityId, string bankName, string bankDesc)
         {
             Bank bank = new();

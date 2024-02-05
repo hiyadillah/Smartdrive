@@ -34,7 +34,8 @@ namespace Smartdrive.Repositories.Payment
             Bank data = db.Banks.Where(x => x.BankEntityid == idToInt).FirstOrDefault();
 
             return data;
-        } 
+        }
+
         public void Create(BankResponse bankResponse)
         {
             using var db = new SmartdriveContext();
@@ -51,6 +52,24 @@ namespace Smartdrive.Repositories.Payment
                 BankDesc = bankResponse.bankDesc
             };
             db.Banks.Add(bank);
+            db.SaveChanges();
+        }
+
+        public void Update(BankResponse bankResponse)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            using var db = new SmartdriveContext();
+            var businessEntities = db.BusinessEntities.Where(x => x.Entityid == id).FirstOrDefault();
+            var bank = db.Banks.Where(x => x.BankEntityid == id).FirstOrDefault();
+
+            db.Remove(bank);
+            db.SaveChanges();
+
+            db.Remove(businessEntities);
             db.SaveChanges();
         }
     }

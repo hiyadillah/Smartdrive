@@ -6,6 +6,6 @@ namespace Smartdrive.Repositories.Payment
     {
         public void Create(BankResponse bankResponse);
         public void Update(BankResponse bankResponse);
-        public void Delete(BankResponse bankResponse);
+        public void Delete(int id);
     }
 }
