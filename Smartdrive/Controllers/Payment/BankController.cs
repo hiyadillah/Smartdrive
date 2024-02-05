@@ -44,8 +44,13 @@ namespace Smartdrive.Controllers.Payment
 
         // PUT api/<BankController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, string bankName, string bankDesc)
         {
+            BankResponse data = _bankService.FindById(id);
+            if (data == null)
+                return NotFound("User not found with the given ID");
+            _bankService.Update(data.bankEntityId, bankName, bankDesc);
+            return Ok("Data Changed");
         }
 
         // DELETE api/<BankController>/5

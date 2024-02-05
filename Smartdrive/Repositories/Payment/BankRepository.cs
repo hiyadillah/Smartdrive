@@ -55,9 +55,16 @@ namespace Smartdrive.Repositories.Payment
             db.SaveChanges();
         }
 
-        public void Update(BankResponse bankResponse)
+        public void Update(int id, BankResponse bankResponse)
         {
-            throw new NotImplementedException();
+            using var db = new SmartdriveContext();
+
+            Bank bank = db.Banks.Where(x => x.BankEntityid == id).FirstOrDefault();
+            bank.BankName = bankResponse.bankName;
+            bank.BankDesc = bankResponse.bankDesc;
+
+            db.SaveChanges();
+
         }
 
         public void Delete(int id)
@@ -72,5 +79,6 @@ namespace Smartdrive.Repositories.Payment
             db.Remove(businessEntities);
             db.SaveChanges();
         }
+         
     }
 }

@@ -57,11 +57,23 @@ namespace Smartdrive.Services.Payment
             List<BankResponse> responses = new();
             foreach (var item in data)
             {
-                BankResponse a = new(item.BankEntityid, item.BankName, item.BankDesc);
-                responses.Add(a);
+                BankResponse response = new(item.BankEntityid, item.BankName, item.BankDesc);
+                responses.Add(response);
             }
 
             return responses;
+        }
+
+        public BankResponse Update(int id, string bankName, string bankDesc)
+        {
+            var data = _repo.FindById(id);
+            if (data == null)
+                return null;
+
+            BankResponse newResponse = new(data.BankEntityid, bankName, bankDesc);
+            _bankRepo.Update(id, newResponse);
+
+            return newResponse;
         }
     }
 }

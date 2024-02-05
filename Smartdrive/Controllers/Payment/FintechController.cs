@@ -40,8 +40,9 @@ namespace Smartdrive.Controllers.Payment
 
         // POST api/<FintechController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] Fintech value)
         {
+            return Ok(value);
         }
 
         // PUT api/<FintechController>/5
