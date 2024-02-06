@@ -30,6 +30,7 @@ builder.Services.AddScoped<Mapper>();
 #region Payment
 //Payment.UserAccount
 builder.Services.AddScoped<IRepository<UserAccount>, UserAccountRepository>();
+builder.Services.AddScoped<IUserAccountRepo, UserAccountRepository>();
 builder.Services.AddScoped<IUserAccountService, UserAccountsService>();
 
 //Paymnet.Bank

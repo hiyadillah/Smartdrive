@@ -8,5 +8,4 @@ namespace Smartdrive.Repositories.Payment
         public void Update(int id, FintechResponse fintechResponse);
         public void Delete(int id);
     }
-
 }

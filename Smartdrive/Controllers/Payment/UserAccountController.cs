@@ -42,20 +42,31 @@ namespace Smartdrive.Controllers.Payment
 
         // POST api/<UserAccountsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(int id, string usacAccountNo, decimal usacDebet, decimal usacCredit, string usacType)
         {
+            _userAccountService.Create(id, usacAccountNo, usacDebet, usacCredit, usacType);
         }
 
         // PUT api/<UserAccountsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{usacId}")]
+        public IActionResult Put(int usacId, string usacAccountNo, decimal? usacDebet, decimal? usacCredit, UserAccountPayment usacType)
         {
+            var data = _userAccountService.FindById(usacId);
+            if (data == null)
+                return NotFound("User not found with the given ID");
+            var updated = _userAccountService.Update(usacId, usacAccountNo, usacDebet, usacCredit, usacType.ToString());
+            return Ok(updated);
         }
 
         // DELETE api/<UserAccountsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            var data = _userAccountService.FindById(id);
+            if (data == null)
+                return NotFound("User not found with the given ID");
+            _userAccountService.Delete(id);
+            return Ok("Delete Succesfull");
         }
     }
 }
