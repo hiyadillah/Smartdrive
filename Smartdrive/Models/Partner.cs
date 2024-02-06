@@ -1,8 +1,16 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Smartdrive.Models;
 
+public enum PartnerStatus
+{
+    ACTIVE,
+    INACTIVE
+}
 public partial class Partner
 {
     public int PartEntityid { get; set; }
