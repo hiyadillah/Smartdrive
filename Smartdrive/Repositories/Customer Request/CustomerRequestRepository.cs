@@ -1,62 +1,41 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Smartdrive.Db;
-using Smartdrive.Extension;
 using Smartdrive.Models;
+using Smartdrive.Repositories.Customer_Request.Contract;
 
 namespace Smartdrive.Repositories.Customer_Request
 {
-    public class CustomerRequestRepository : ICustomerRequestRepository
-    {
-        private readonly SmartdriveContext _context;
+	public class CustomerRequestRepository : ICustomerRequestRepository
+	{
+		private readonly SmartdriveContext _context;
 
-        public CustomerRequestRepository(SmartdriveContext context)
-        {
-            _context = context;
-        }
+		public CustomerRequestRepository(SmartdriveContext context)
+		{
+			_context = context;
+		}
 
-        public async Task<CustomerRequest> Add(CustomerRequest newRequest)
-        {
-            BusinessEntity business = new()
-            {
-                EntityModifiedDate = DateTime.Now,
-            };
-            _context.BusinessEntities.Add(business);
-            await _context.SaveChangesAsync();
-            newRequest.CreqEntityid = business.Entityid;
+		public async Task<CustomerRequest> get(int id)
+		{
+			var result = await _context.CustomerRequests
+				.Where(creq => creq.CreqEntityid == id)
+				.Include(creq => creq.CreqCustEntity)
+				.Include(creq => creq.CreqAgenEntity)
+				.FirstOrDefaultAsync();
 
-            _context.CustomerRequests.Add(newRequest);
-            await _context.SaveChangesAsync();
+			return result;
+		}
 
-            return newRequest;
-        }
+		public async Task<List<CustomerRequest>> getAll(int id, string code)
+		{
+			var result = await _context.CustomerRequests
+				.Where(creq => creq.CreqCustEntityid == id)
+				.Where(creq => creq.CreqAgenEntity.EawgArwgCode == code)
+				.Include(creq => creq.CreqCustEntity)
+				.Include(creq => creq.CreqAgenEntity)
+				.ToListAsync();
 
-        public async Task<CustomerRequest> Delete(int id)
-        {
-            var custReq = await _context.CustomerRequests.FirstOrDefaultAsync(c => c.CreqEntityid == id);
-            _context.CustomerRequests.Remove(custReq);
-
-            await _context.SaveChangesAsync();
-            return custReq;
-        }
-
-        public async Task<CustomerRequest> Edit(CustomerRequest updatedRequest)
-        {
-            _context.Update(updatedRequest);
-            await _context.SaveChangesAsync();
-
-            return updatedRequest;
-
-        }
-
-        public async Task<List<CustomerRequest>> GetAll()
-        {
-            return await _context.CustomerRequests.ToListAsync();
-        }
-
-        public async Task<CustomerRequest> GetById(int id)
-        {
-            return await _context.CustomerRequests.FirstOrDefaultAsync(c => c.CreqEntityid == id);
-        }
-    }
+			return result;
+		}
+	}
 }
+

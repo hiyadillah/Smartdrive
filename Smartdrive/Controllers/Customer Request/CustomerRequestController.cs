@@ -1,71 +1,55 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Smartdrive.DTO.Customer_Request;
-using Smartdrive.Extension;
-using Smartdrive.Services.Customer_Request;
+using Smartdrive.DTO.Customer_Request.Response;
+using Smartdrive.Models;
+using Smartdrive.Repositories;
+using Smartdrive.Repositories.Customer_Request.Contract;
+using Smartdrive.Services.Customer_Request.Contract;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Smartdrive.Controllers.Customer_Request
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CustomerRequestController : ControllerBase
-    {
-        private readonly CustomerRequestService _service;
+	[Route("api/customer/service")]
+	[ApiController]
+	public class CustomerRequestController : ControllerBase
+	{
+		private readonly ICustomerRequestService _customerRequestService;
 
-        public CustomerRequestController(CustomerRequestService service)
-        {
-            _service = service;
-        }
+		public CustomerRequestController(ICustomerRequestRepository customerRequestRepository, ICustomerRequestService customerRequestService)
+		{
+			_customerRequestService = customerRequestService;
+		}
 
-        // GET: api/<CustomerRequestController>
-        [HttpGet]
-        public async Task<ActionResult<ServiceResponse<List<CustomerRequestDto>>>> GetAllCustomerRequest()
-        {
-            return Ok(await _service.GetAllCustomerRequest());
-        }
+		// GET: api/<CustomerController>
+		[HttpGet("request")]
+		public async Task<ActionResult<List<CustomerReqResponse>>> GetAllCustomerRequest(int userEntityId, string arwgCode)
+		{
+			return Ok(await _customerRequestService.GetAll(userEntityId, arwgCode));
+		}
 
-        // GET api/<CustomerRequestController>/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ServiceResponse<CustomerRequestDto>>> GetCustomerRequestById(int id)
-        {
-            var response = await _service.GetCustomerRequestById(id);
-            if (response.Data is null)
-            {
-                return NotFound(response);
-            }
-            return Ok(response);
-        }
+		// GET api/<CustomerController>/5
+		[HttpGet("{id}")]
+		public async Task<ActionResult> Get(int id)
+		{
+			return Ok(await _customerRequestService.Get(id));
+		}
 
-        // POST api/<CustomerRequestController>
-        [HttpPost]
-        public async Task<ActionResult<ServiceResponse<CustomerRequestDto>>> CreateCustomerRequest(AddCustomerRequestDto newRequest)
-        {
-            return Ok(await _service.CreateCustomerRequest(newRequest));
-        }
+		// POST api/<CustomerController>
+		[HttpPost]
+		public void Post([FromBody] string value)
+		{
+		}
 
-        // PUT api/<CustomerRequestController>/5
-        [HttpPut]
-        public async Task<ActionResult<ServiceResponse<CustomerRequestDto>>> UpdateCustomerRequest(UpdateCustomerRequestDto updatedRequest)
-        {
-            var response = await _service.UpdateCustomerRequest(updatedRequest);
-            if (response.Data is null)
-            {
-                return NotFound(response);
-            }
-            return Ok(response);
-        }
+		// PUT api/<CustomerController>/5
+		[HttpPut("{id}")]
+		public void Put(int id, [FromBody] string value)
+		{
+		}
 
-        // DELETE api/<CustomerRequestController>/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ServiceResponse<CustomerRequestDto>>> DeleteCustomerRequest(int id)
-        {
-            var response = await _service.DeleteCustomerRequest(id);
-            if(response.Data is null)
-            {
-                return NotFound(response);
-            }
-            return Ok(response);
-        }
-    }
+		// DELETE api/<CustomerController>/5
+		[HttpDelete("{id}")]
+		public void Delete(int id)
+		{
+		}
+	}
 }

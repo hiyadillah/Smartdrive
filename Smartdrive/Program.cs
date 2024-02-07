@@ -5,9 +5,11 @@ using Smartdrive.Extension;
 using Smartdrive.Models;
 using Smartdrive.Repositories;
 using Smartdrive.Repositories.Customer_Request;
+using Smartdrive.Repositories.Customer_Request.Contract;
 using Smartdrive.Repositories.Master;
 using Smartdrive.Repositories.Service_Order;
 using Smartdrive.Services.Customer_Request;
+using Smartdrive.Services.Customer_Request.Contract;
 using Smartdrive.Services.Master;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,10 +27,11 @@ builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services.AddScoped<IRepository<CarBrand>, CarBrandRepository>();
 builder.Services.AddScoped<ICarBrandService, CarBrandService>();
 builder.Services.AddScoped<ServiceRepository>();
-builder.Services.AddScoped<CustomerRequestRepository>();
-builder.Services.AddScoped<CustomerRequestService>();
 builder.Services.AddScoped<Mapper>();
 
+// Customer Modul inject services and repositories
+builder.Services.AddScoped<ICustomerRequestRepository, CustomerRequestRepository>();
+builder.Services.AddScoped<ICustomerRequestService, CustomerRequestService>();
 
 builder.Services.AddDbContext<SmartdriveContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("SmartDriveDB")));

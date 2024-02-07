@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Smartdrive.DTO.Customer_Request;
+using Smartdrive.DTO.Customer_Request.Response;
 using Smartdrive.DTO.Service_Order;
 using Smartdrive.Models;
 
@@ -10,9 +11,9 @@ namespace Smartdrive.Extension
         public MapperProfile()
         {
             CreateMap<Service, ServiceDto>().ReverseMap();
-            CreateMap<CustomerRequest, CustomerRequestDto>().ReverseMap();
-            CreateMap<CustomerRequest, AddCustomerRequestDto>().ReverseMap();
-            CreateMap<CustomerRequest, UpdateCustomerRequestDto>().ReverseMap();
+            CreateMap<CustomerRequest, CustomerReqResponse>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<EmployeeAreWorkgroup, EmployeeAreaWorkgroupDto>().ReverseMap();
         }
     }
 }

@@ -27,6 +27,7 @@
     <Folder Include="Controllers\Payment\" />
     <Folder Include="Controllers\Partner\" />
     <Folder Include="Db\" />
+    <Folder Include="DTO\Customer Request\Request\" />
     <Folder Include="DTO\HR\" />
     <Folder Include="DTO\Partner\" />
     <Folder Include="DTO\User\" />
