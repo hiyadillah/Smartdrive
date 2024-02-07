@@ -7,7 +7,7 @@ namespace Smartdrive.Services.UserModule
     public interface IUserService
     {
         List<UserResponse> GetUsers();
-        UserResponse GetUserById(dynamic id);
+        User GetUserById(dynamic id);
 
         //UserResponse CreateEmployee(UserRequest user);
         UserResponse CreateEmployee(UserRequest user);

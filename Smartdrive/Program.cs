@@ -60,7 +60,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuer = false,
             ValidateAudience = false,
             ClockSkew = TimeSpan.Zero,
-            RoleClaimType = "akses",
+            //RoleClaimType = "akses",
         };
     });
 
@@ -74,9 +74,11 @@ builder.Services.AddScoped<ICarBrandService, CarBrandService>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IBusinessEntityRepository, BusinessEntityRepository>();
 builder.Services.AddScoped<IUserRolesRepository, UserRolesRepository>();
+builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
 //users service
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
 
 //login helpers
 builder.Services.AddScoped<JwtHelper>();

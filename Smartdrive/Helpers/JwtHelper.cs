@@ -1,9 +1,12 @@
-﻿using Azure.Core;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using Smartdrive.Common;
+using Smartdrive.DTO.UserModule;
 using Smartdrive.Models;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Smartdrive.Helpers
@@ -33,7 +36,7 @@ namespace Smartdrive.Helpers
             //claims roles
             foreach (var role in userRoles)
             {
-                claims.Add(new(CustomClaims.Roles, role.UsroRoleName));
+                //claims.Add(new(CustomClaims.Roles, role.UsroRoleName));
                 claims.Add(new Claim(ClaimTypes.Role, role.UsroRoleName));
             }
 
@@ -45,7 +48,7 @@ namespace Smartdrive.Helpers
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddSeconds(120),
+                expires: DateTime.Now.AddSeconds(30),
                 signingCredentials: creds);
 
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);

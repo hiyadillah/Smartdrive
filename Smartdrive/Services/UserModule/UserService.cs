@@ -101,7 +101,7 @@ namespace Smartdrive.Services.UserModule
             return response;
         }
 
-        public UserResponse? GetUserById(dynamic id)
+        public User? GetUserById(dynamic id)
         {
             var data = _usersRepo.FindById((int)id);
 
@@ -110,18 +110,21 @@ namespace Smartdrive.Services.UserModule
                 return null;
             }
 
-            UserResponse response = new(
-                            data.UserEntityid,
-                            data.UserName,
-                            data.UserFullName,
-                            data.UserEmail,
-                            data.UserBirthPlace,
-                            data.UserBirthDate,
-                            data.UserNationalId,
-                            data.UserNpwp,
-                            data.UserPhoto,
-                            data.UserModifiedDate
-                        );
+            //UserResponse response = new(
+            //                data.UserEntityid,
+            //                data.UserName,
+            //                data.UserFullName,
+            //                data.UserEmail,
+            //                data.UserBirthPlace,
+            //                data.UserBirthDate,
+            //                data.UserNationalId,
+            //                data.UserNpwp,
+            //                data.UserPhoto,
+            //                data.UserModifiedDate
+            //            );
+
+            User response = _mapper.Map<User>(data);
+
             return response;
         }
 

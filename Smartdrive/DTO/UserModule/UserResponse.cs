@@ -1,7 +1,9 @@
-﻿namespace Smartdrive.DTO.UserModule
+﻿using Smartdrive.Models;
+
+namespace Smartdrive.DTO.UserModule
 {
     public record UserResponse(
-        int UserEntityId,
+        int UserEntityid,
         string? UserName,
         string? UserFullName,
         string UserEmail,
@@ -11,5 +13,7 @@
         string? UserNpwp,
         string? UserPhoto,
         DateTime? UserModifiedDate
+        //RefreshToken RefreshTokens
+        //ICollection<RefreshToken> RefreshTokens
     );
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Smartdrive.DTO.UserModule;
 using Smartdrive.Models;
@@ -11,9 +12,11 @@ namespace Smartdrive.Controllers.UserModule
     public class UserController : ControllerBase
     {
         private readonly IUserService _usersService;
-        public UserController(IUserService usersService)
+        private readonly Mapper _mapper;
+        public UserController(IUserService usersService, Mapper mapper)
         {
             _usersService = usersService;
+            _mapper = mapper;
         }
 
         [Authorize(Roles = "PC, CU")]
