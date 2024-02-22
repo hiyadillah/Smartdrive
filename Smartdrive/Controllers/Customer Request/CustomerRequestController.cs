@@ -15,23 +15,37 @@ namespace Smartdrive.Controllers.Customer_Request
 	{
 		private readonly ICustomerRequestService _customerRequestService;
 
-		public CustomerRequestController(ICustomerRequestRepository customerRequestRepository, ICustomerRequestService customerRequestService)
+		public CustomerRequestController(ICustomerRequestService customerRequestService)
 		{
 			_customerRequestService = customerRequestService;
 		}
 
 		// GET: api/<CustomerController>
 		[HttpGet("request")]
-		public async Task<ActionResult<List<CustomerReqResponse>>> GetAllCustomerRequest(int userEntityId, string arwgCode)
+		public async Task<ActionResult<List<CustomerReqResponse>>> GetAllCustomerRequest(int id, string arwgCode, string role)
 		{
-			return Ok(await _customerRequestService.GetAll(userEntityId, arwgCode));
+			List<CustomerReqResponse> result = new();
+
+			if (role == "Customer")
+			{
+				result = await _customerRequestService.GetAllByCustomer(id);
+
+			}
+			else if (role == "Employee")
+			{
+				result = await _customerRequestService.GetAllByEmployee(arwgCode);
+			}
+			return Ok(result);
 		}
 
 		// GET api/<CustomerController>/5
 		[HttpGet("{id}")]
 		public async Task<ActionResult> Get(int id)
 		{
-			return Ok(await _customerRequestService.Get(id));
+			var response = await _customerRequestService.Get(id);
+			if (response == null)
+				return NotFound($"Customer Request with the given id is not found.");
+			return Ok(response);
 		}
 
 		// POST api/<CustomerController>

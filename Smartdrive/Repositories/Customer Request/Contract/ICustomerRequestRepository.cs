@@ -4,7 +4,8 @@ namespace Smartdrive.Repositories.Customer_Request.Contract
 {
 	public interface ICustomerRequestRepository
 	{
-		Task<List<CustomerRequest>> getAll(int id, string code);
+		Task<List<CustomerRequest>> getAllByCustomer(int id);
+		Task<List<CustomerRequest>> getAllByEmployee(string code);
 		Task<CustomerRequest> get(int id);
 	}
 }

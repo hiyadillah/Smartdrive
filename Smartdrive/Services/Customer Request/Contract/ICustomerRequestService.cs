@@ -6,6 +6,7 @@ namespace Smartdrive.Services.Customer_Request.Contract
 	public interface ICustomerRequestService
 	{
 		Task<CustomerReqResponse> Get(int id);
-		Task<List<CustomerReqResponse>> GetAll(int id, string code);
+		Task<List<CustomerReqResponse>> GetAllByCustomer(int id);
+		Task<List<CustomerReqResponse>> GetAllByEmployee(string code);
 	}
 }

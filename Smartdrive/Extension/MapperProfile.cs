@@ -13,7 +13,6 @@ namespace Smartdrive.Extension
             CreateMap<Service, ServiceDto>().ReverseMap();
             CreateMap<CustomerRequest, CustomerReqResponse>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
-            CreateMap<EmployeeAreWorkgroup, EmployeeAreaWorkgroupDto>().ReverseMap();
         }
     }
 }

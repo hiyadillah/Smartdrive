@@ -19,19 +19,26 @@ namespace Smartdrive.Repositories.Customer_Request
 			var result = await _context.CustomerRequests
 				.Where(creq => creq.CreqEntityid == id)
 				.Include(creq => creq.CreqCustEntity)
-				.Include(creq => creq.CreqAgenEntity)
 				.FirstOrDefaultAsync();
 
 			return result;
 		}
 
-		public async Task<List<CustomerRequest>> getAll(int id, string code)
+		public async Task<List<CustomerRequest>> getAllByCustomer(int id)
 		{
 			var result = await _context.CustomerRequests
 				.Where(creq => creq.CreqCustEntityid == id)
+				.Include(creq => creq.CreqCustEntity)
+				.ToListAsync();
+
+			return result;
+		}
+
+		public async Task<List<CustomerRequest>> getAllByEmployee(string code)
+		{
+			var result = await _context.CustomerRequests
 				.Where(creq => creq.CreqAgenEntity.EawgArwgCode == code)
 				.Include(creq => creq.CreqCustEntity)
-				.Include(creq => creq.CreqAgenEntity)
 				.ToListAsync();
 
 			return result;
